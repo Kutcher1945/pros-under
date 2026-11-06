@@ -1,0 +1,47 @@
+# dependencies
+node_modules
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+coverage
+
+# next.js
+.next/
+out/
+
+# production
+build
+
+# misc
+.DS_Store
+*.pem
+.git
+.gitignore
+README.md
+
+# env files — secrets must never enter a build layer; supply
+# NEXT_PUBLIC_BACKEND_API_URL via --build-arg instead (see Dockerfile)
+.env*
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+
+# Опека: tests, browser e2e (with screenshots/report) and docs are not needed in the image
+tests
+e2e
+docs

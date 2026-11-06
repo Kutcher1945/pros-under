@@ -1,0 +1,176 @@
+/* Design tokens copied from prosecutor_dtp_next/app/globals.css so Опека
+   looks like the ДТП dashboard: same palette, radii, shadows, light/dark. */
+
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --ink-mute: #898781;
+  --grid: #e1e0d9;
+  --border: rgba(11, 11, 11, 0.1);
+  --s1: #2a78d6;
+  --s2: #eb6834;
+  --s3: #1baf7a;
+  --accent-bg: #eef5fd;
+  --cell0: #f3f2ee;
+  --danger: #b3261e;
+  --radius: 10px;
+  --radius-lg: 14px;
+  --shadow: 0 1px 2px rgba(11, 11, 11, 0.05), 0 4px 14px rgba(11, 11, 11, 0.04);
+
+  /* Table + control tokens from the alcohol module (alcohol.module.css). */
+  --line: #e1e5e9;
+  --muted: #556575;
+  --link: #2a78d6;
+  --table-head: #183b61;
+  --row-even: #f5f8fb;
+  --options: #f1f5fa;
+  --options-hover: #e4edf8;
+  --note-warn: #fff8e6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --ink: #ffffff;
+    --ink-2: #c3c2b7;
+    --ink-mute: #898781;
+    --grid: #2c2c2a;
+    --border: rgba(255, 255, 255, 0.1);
+    --s1: #3987e5;
+    --s2: #d95926;
+    --s3: #199e70;
+    --accent-bg: #14243a;
+    --cell0: #232322;
+    --danger: #e15a51;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 14px rgba(0, 0, 0, 0.3);
+    --line: #383835;
+    --muted: #c3c2b7;
+    --link: #74b0fa;
+    --row-even: #202b35;
+    --options: #202b35;
+    --options-hover: #2d4055;
+    --note-warn: #2a2410;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --ink: #ffffff;
+  --ink-2: #c3c2b7;
+  --ink-mute: #898781;
+  --grid: #2c2c2a;
+  --border: rgba(255, 255, 255, 0.1);
+  --s1: #3987e5;
+  --s2: #d95926;
+  --s3: #199e70;
+  --accent-bg: #14243a;
+  --cell0: #232322;
+  --danger: #e15a51;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 14px rgba(0, 0, 0, 0.3);
+  --line: #383835;
+  --muted: #c3c2b7;
+  --link: #74b0fa;
+  --row-even: #202b35;
+  --options: #202b35;
+  --options-hover: #2d4055;
+  --note-warn: #2a2410;
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  min-height: 100vh;
+  background: var(--page);
+  color: var(--ink);
+  font: 14px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+a {
+  color: var(--link);
+}
+
+.app-header-btn {
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+.app-header-btn:hover {
+  background: var(--accent-bg);
+  border-color: var(--s1);
+  color: var(--ink);
+}
+.app-header-btn:active {
+  transform: translateY(1px);
+}
+
+@keyframes app-pop {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Leaflet paints #ddd until tiles arrive; the login maps sit under a dark
+   scrim, so that grey would show through as a washed-out panel. */
+.leaflet-container {
+  background: #0d0d0d;
+  font: inherit;
+}
+
+/* Login hero: pulsing district markers (Leaflet divIcon, see LoginMap). */
+.login-district {
+  background: transparent;
+  border: 0;
+}
+.login-district span {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  background: #3987e5;
+  box-shadow: 0 0 0 0 rgba(57, 135, 229, 0.55);
+  animation: login-pulse 3.6s ease-out infinite;
+}
+@keyframes login-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(57, 135, 229, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(57, 135, 229, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(57, 135, 229, 0);
+  }
+}

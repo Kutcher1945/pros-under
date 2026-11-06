@@ -1,0 +1,326 @@
+/* Copied from prosecutor_dtp_next/app/login/page.tsx (inline styles there),
+   with a map hero instead of the traffic video. */
+
+.page {
+  display: flex;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Left: hero ────────────────────────────────────────── */
+.hero {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  background: #0d0d0d;
+}
+.heroVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Scaled so the blur's soft edge falls outside the frame (ДТП login trick);
+     dimmed harder than there — the source flashes bright blue and white. */
+  transform: scale(1.04);
+  filter: blur(2.5px) brightness(0.5) contrast(0.92) saturate(1.1);
+}
+/* Still map shown instead of the video under prefers-reduced-motion. */
+.heroMap {
+  position: absolute;
+  inset: 0;
+  filter: brightness(0.85);
+}
+.heroShadeSide {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.25) 55%, rgba(0, 0, 0, 0.05) 100%);
+}
+.heroShadeBottom {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 40%);
+}
+.heroText {
+  position: absolute;
+  right: 40px;
+  bottom: 48px;
+  left: 40px;
+}
+.heroText h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.heroText p {
+  margin: 8px 0 0;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 15px;
+}
+.heroStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+.heroStats span {
+  padding: 5px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 12.5px;
+  backdrop-filter: blur(6px);
+}
+
+/* ── Right: login panel — always dark: it sits on a dark map ── */
+.panel {
+  --ink: #ffffff;
+  --ink-2: #c3c2b7;
+  --ink-mute: #9a988f;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --border: rgba(255, 255, 255, 0.14);
+  --s1: #3987e5;
+  --accent-bg: #14243a;
+  --danger: #ff6b62;
+  color-scheme: dark;
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  justify-content: center;
+  width: min(460px, 100%);
+  padding: 56px 40px;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--page) 0%, var(--surface) 100%);
+  color: var(--ink);
+}
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+.glowBlue,
+.glowRed {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(10px);
+}
+.glowBlue {
+  top: -80px;
+  right: -80px;
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, color-mix(in srgb, #2979ff 35%, transparent), transparent 70%);
+}
+.glowRed {
+  bottom: -100px;
+  left: -100px;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, color-mix(in srgb, #ff2d2d 30%, transparent), transparent 70%);
+}
+.dots {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.dotX {
+  left: -3%;
+  animation-name: drive-x;
+}
+.dotY {
+  top: -3%;
+  animation-name: drive-y;
+}
+@keyframes drive-x {
+  0% {
+    left: -3%;
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  94% {
+    opacity: 1;
+  }
+  100% {
+    left: 103%;
+    opacity: 0;
+  }
+}
+@keyframes drive-y {
+  0% {
+    top: -3%;
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  94% {
+    opacity: 1;
+  }
+  100% {
+    top: 103%;
+    opacity: 0;
+  }
+}
+.bottomGlow {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 256px;
+  background: radial-gradient(ellipse at 50% 100%, var(--accent-bg), transparent 70%);
+}
+
+.form {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+.logo {
+  width: auto;
+  height: 34px;
+  margin-bottom: 24px;
+}
+.form h1 {
+  margin: 0 0 4px;
+  color: var(--ink);
+  font-size: 22px;
+  font-weight: 600;
+}
+.lead {
+  margin: 0 0 32px;
+  color: var(--ink-mute);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.label {
+  display: block;
+  margin: 0 0 6px;
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 500;
+}
+.label + .label,
+.gap {
+  margin-top: 18px;
+}
+.input {
+  width: 100%;
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  outline: none;
+  background: var(--page);
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.input:focus {
+  border-color: var(--s1);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--s1) 20%, transparent);
+}
+/* Chrome/Edge autofill tint would make the field look see-through over the map. */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--ink);
+  -webkit-box-shadow: 0 0 0 1000px var(--page) inset;
+  box-shadow: 0 0 0 1000px var(--page) inset;
+  caret-color: var(--ink);
+  transition: background-color 9999s ease-in-out 0s;
+}
+.passwordWrap {
+  position: relative;
+}
+.passwordWrap .input {
+  padding-right: 44px;
+}
+.eye {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  display: flex;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--ink-mute);
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+.eye:hover {
+  color: var(--ink);
+}
+.error {
+  margin: 18px 0 0;
+  padding: 9px 12px;
+  border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--danger) 15%, transparent);
+  color: var(--danger);
+  font-size: 13px;
+}
+.submit {
+  width: 100%;
+  height: 42px;
+  margin-top: 22px;
+  border: none;
+  border-radius: 6px;
+  background: var(--s1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 14px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+.submit:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+.submit:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+.submit:active {
+  transform: translateY(1px);
+}
+.submit:focus-visible,
+.eye:focus-visible {
+  outline: 2px solid var(--s1);
+  outline-offset: 2px;
+}
+
+
+@media (max-width: 900px) {
+  .hero {
+    display: none;
+  }
+  .panel {
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dots {
+    display: none;
+  }
+}

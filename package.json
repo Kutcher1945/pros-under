@@ -1,0 +1,35 @@
+{
+  "name": "opeka_next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "docs:docx": "node docs/build-docx.mjs"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "leaflet": "^1.9.4",
+    "next": "16.3.2",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.22",
+    "@types/node": "^22.20.5",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitest/coverage-v8": "^5.1.0",
+    "docx": "^9.15.2",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.2",
+    "playwright": "^1.64.1",
+    "typescript": "^5",
+    "vite": "^8.3.5",
+    "vitest": "^5.1.0"
+  }
+}
